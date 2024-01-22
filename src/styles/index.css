@@ -1,0 +1,207 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main-page {
+  width: 90%;
+  height: auto;
+  margin: auto;
+  padding: 10px;
+}
+
+.header {
+  display: block;
+  width: 100%;
+  height: 150px;
+  border: 10px solid rgb(242, 239, 242);
+  background-color: rgb(179 19 171);
+  margin-bottom: 30px;
+}
+.header img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+.add-child-form {
+  position: relative;
+  width: 90%;
+  padding: 10px;
+  border: 2px solid rgb(178, 174, 174);
+  box-shadow: 0 0 5px rgb(31, 29, 29);
+  margin: 20px;
+}
+
+.add-child-form label {
+  margin: 10px;
+  color: rgb(14, 121, 142);
+}
+.add-child-form input {
+  border: 2px solid rgb(10 161 192);
+  margin: 5px;
+  border-radius: 7px;
+}
+.add-child-form button {
+  margin: 5px;
+}
+.child-picture {
+  background: white;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgb(233, 215, 9);
+}
+
+.child-picture:hover {
+  border: 3px dotted rgb(152, 71, 239);
+}
+
+.children-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.child-card {
+  position: relative;
+  border: 1px solid rgb(182, 36, 94);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgb(235, 235, 203);
+}
+.child-card:hover {
+  box-shadow: 5px 5px 5px rgb(155, 155, 8);
+}
+.child-card img {
+  width: 200px;
+  height: 200px;
+  margin: 30px;
+}
+.child-card h1 {
+  color: #fff;
+  background-color: rgb(182, 36, 94);
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 3px 2px 2px rgb(169, 216, 185);
+}
+.child-card span {
+  position: absolute;
+  top: -2%;
+  left: 0;
+  font-weight: bolder;
+  border: 1px solid rgb(7, 43, 9);
+  box-shadow: 1px 1px 2px purple;
+  padding: 7px;
+  border-radius: 3px;
+}
+.child-card button {
+  margin: 5px;
+}
+
+.show-more {
+  cursor: pointer;
+  color: orange;
+  text-decoration: none;
+  float: right;
+  border: 1px solid rgb(244, 183, 72);
+  margin: 5px;
+  padding: 5px;
+}
+
+.modal-body {
+  display: flex;
+  gap: 20px;
+}
+.modal-picture {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  box-shadow: 0 0 6px rgb(233, 215, 9);
+}
+
+.edit-picture-container {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid rgb(163, 158, 158);
+  padding: 5px;
+}
+.edit-picture-container img {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgb(178, 85, 51);
+  border-radius: 50%;
+  margin: 3px;
+}
+
+.edit-picture-container > button {
+  align-self: end;
+  margin: 10px;
+}
+.delete-button {
+  display: block;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.brush-icon {
+  position: absolute;
+  border: 1px solid rgb(224, 79, 79);
+  top: 10px;
+  left: 5px;
+  cursor: pointer;
+}
+.brush-icon:hover {
+  box-shadow: 2px 2px rgb(227, 158, 31);
+}
+
+.time-event-logs {
+  opacity: 50%;
+  font-size: 10px;
+  margin: 20px;
+  float: right;
+}
+
+.footer {
+  display: flex;
+  margin-top: 20px;
+  background: rgb(61, 4, 66);
+  border-radius: 8px;
+  color: white;
+  padding: 10px;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 700px) {
+  .header img {
+    width: 100%;
+  }
+  .modal-body {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  .modal-picture {
+    margin: 20px;
+    width: 90px;
+    height: 90px;
+  }
+  .modal-card {
+    width: 28rem;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 10px;
+  }
+  .footer {
+    flex-direction: column;
+  }
+  .delete-button {
+
+    width: 100%;
+  }
+}
