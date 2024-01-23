@@ -98,8 +98,6 @@ function List({ list, onChangeChildPoints, color, message, disabled }) {
               <Badge bg="primary" pill>
                 {item.points}
               </Badge>
-              
-             
             </ListGroup.Item>
           </ListGroup>
         </div>

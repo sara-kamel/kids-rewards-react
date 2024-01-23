@@ -9,7 +9,7 @@ export default function Person({ onDeletChild, onEditChild, child }) {
 
   const handleClose = () => {
     setShow(false);
-    setEditPicture(false)
+    setEditPicture(false);
   };
   const handleShow = () => setShow(true);
 
@@ -42,7 +42,7 @@ export default function Person({ onDeletChild, onEditChild, child }) {
             )
           }
         >
-          good point &#128077;
+          Good Point &#128077;
         </Button>
         <Button
           variant="danger"
@@ -53,15 +53,15 @@ export default function Person({ onDeletChild, onEditChild, child }) {
             )
           }
         >
-          bad point &#128078;
+          Bad Point &#128078;
         </Button>
 
         <div>
           <h6 href="#" className="show-more" onClick={handleShow}>
-            Show more
+            Show More
           </h6>
         </div>
-        <div >
+        <div>
           <Modal show={show} onHide={handleClose} size="lg">
             <Modal.Header closeButton></Modal.Header>
             <Modal.Body className="modal-body">
@@ -106,16 +106,16 @@ export default function Person({ onDeletChild, onEditChild, child }) {
                   )}
                 </Card.Body>
                 <Card.Footer>
-                <Button
-                  className="delete-button"
-                  variant="danger"
-                  onClick={() => {
-                    onEditChild(child, `${child.name} has been deleted`);
-                    onDeletChild();
-                  }}
-                >
-                  Delete
-                </Button>
+                  <Button
+                    className="delete-button"
+                    variant="danger"
+                    onClick={() => {
+                      onEditChild(child, `${child.name} has been deleted`);
+                      onDeletChild();
+                    }}
+                  >
+                    Delete
+                  </Button>
                 </Card.Footer>
               </Card>
 
@@ -161,12 +161,12 @@ function EditPicture({ pictures, onChoosePicture, onSave }) {
                 onChoosePicture(picture.image_url);
               }}
             />
-          </div> 
+          </div>
         </>
       ))}
-<br/>
-      <Button variant="success" onClick={onSave}>
-        close
+      <br />
+      <Button variant="outline-info" onClick={onSave}>
+        Close
       </Button>
     </section>
   );
@@ -212,7 +212,7 @@ function UpdateChildName({ child, onUpdateChildName, handleClose }) {
                 }
               }}
             >
-              save
+              Save
             </Button>
             <div className="vr" />
             <Button

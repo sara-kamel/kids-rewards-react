@@ -13,13 +13,17 @@ export default function EventLogs({ eventLogs, onClearHistory }) {
 
   return (
     <div>
-      <Button style={{ float: "right" }} variant="primary" onClick={handleShow}>
-        history
+      <Button
+        style={{ float: "right" }}
+        variant="outline-info"
+        onClick={handleShow}
+      >
+        History
       </Button>
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>history:</Offcanvas.Title>
+          <Offcanvas.Title>History:</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           {reverseENentLogs.map((event) => (
@@ -31,7 +35,9 @@ export default function EventLogs({ eventLogs, onClearHistory }) {
             </ListGroup>
           ))}
         </Offcanvas.Body>
-        <Button onClick={onClearHistory}>Clear history</Button>
+        <Button variant="outline-info" onClick={onClearHistory}>
+          Clear history
+        </Button>
       </Offcanvas>
     </div>
   );

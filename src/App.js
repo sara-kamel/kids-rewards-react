@@ -43,7 +43,7 @@ export default function App() {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-    hour12: false 
+    hour12: false,
   };
 
   const formattedDate = currentDate.toLocaleString("en-US", options);
@@ -74,7 +74,7 @@ export default function App() {
       />
       <br />
 
-      <Alert   variant="light">
+      <Alert variant="light">
         <EventLogs
           eventLogs={eventLogs}
           onClearHistory={() => {
@@ -99,7 +99,7 @@ export default function App() {
           </>
         ))}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
