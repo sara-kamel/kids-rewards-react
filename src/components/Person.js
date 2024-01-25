@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal, Badge, Stack, Card } from "react-bootstrap";
+import { Button, Modal, Badge, Stack, Card, Form } from "react-bootstrap";
 import Summary from "./Summary";
 import FunnyFaces from "./FunnyFaces";
 
@@ -188,7 +188,7 @@ function UpdateChildName({ child, onUpdateChildName, handleClose }) {
       {isEdit && (
         <div>
           <Stack direction="horizontal" gap={3}>
-            <input
+            <Form.Control
               value={childName}
               onChange={(e) => {
                 setChildName(e.target.value);
