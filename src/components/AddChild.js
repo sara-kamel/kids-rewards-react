@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 
+
 export default function AddChild({ onAddChild }) {
   const [childName, setChildName] = useState("");
   const [childPicture, setChildPicture] = useState(null);
@@ -49,7 +50,7 @@ export default function AddChild({ onAddChild }) {
         <Button onClick={() => setShowPicture(true)} variant="info">
           choose picture
         </Button>
-
+       
         <br />
         <figure>
           {showPicture &&

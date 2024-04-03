@@ -18,101 +18,103 @@ const tasks = [
   { name: "Work out", id: uuidv4(), points: 20 },
   { name: "Help in lundry", id: uuidv4(), points: 15 },
   { name: "Do vacuum", id: uuidv4(), points: 30 },
-  { name: "Help mom in dinner", id: uuidv4(), points: 25 }
+  { name: "Help mom in dinner", id: uuidv4(), points: 25 },
 ];
-export default function Summary({ child, onEditPointsByAchievement }) {
-  const [list, setList] = useState(child.count >= 1 ? rewards : tasks);
 
-  function UpdateList(item, name, points) {
-    item.name = name;
-    item.points = points;
-    setList(list);
+export default function Summary({ child, onEditPointsByAchievement }) {
+  function handleChange(item) {
+    if (child.count > 0)
+      onEditPointsByAchievement(
+        {
+          ...child,
+          count: child.count - item.points,
+        },
+        ` ${child.name} earned "${item.name}" good job ${child.name}`
+      );
+    else {
+      onEditPointsByAchievement(
+        {
+          ...child,
+          count: child.count + item.points,
+        },
+        `${child.name} did task "${item.name}" good Job ${child.name}!`
+      );
+    }
   }
   return (
     <>
       <div>
         <h1>Summary</h1>
         <div key={child.id}>
-          {child.count >= 1 && (
-            <div>
-              <List
-                color={"green"}
-                message={
-                  "congratulations! you did very well, choose a reword! "
-                }
-                list={list}
-                disabled={(item) => {
-                  if (item.points > child.count) return true;
-                }}
-                onChangeChildPoints={(item) => {
-                  onEditPointsByAchievement(
-                    {
-                      ...child,
-                      count: child.count - item.points,
-                    },
-                    ` ${child.name} earned "${item.name}" good job ${child.name}`
-                  );
-                }}
-                onUpdateItem={(item, name, points) => {
-                  UpdateList(item, name, points);
-                }}
-              />
-            </div>
+          {child.count > 0 && (
+            <List
+              color={"green"}
+              message={"congratulations! you did very well, choose a reword! "}
+              list={rewards}
+              disabled={(item) => {
+                if (item.points > child.count) return true;
+              }}
+              onChangeChildPoints={(item) => handleChange(item)}
+            />
           )}
-          <div>
-            {child.count < 0 && (
-              <div>
-                <List
-                  color={"red"}
-                  message={
-                    "oh! you need to do tasks to clear your bad points. "
-                  }
-                  list={tasks}
-                  disabled={() => {
-                    return false;
-                  }}
-                  onChangeChildPoints={(item) => {
-                    onEditPointsByAchievement(
-                      {
-                        ...child,
-                        count: child.count + item.points,
-                      },
-                      `${child.name} did task "${item.name}" good Job ${child.name}!`
-                    );
-                  }}
-                  onUpdateItem={(item, name, points) => {
-                    UpdateList(item, name, points);
-                  }}
-                />
-              </div>
-            )}
-          </div>
+          {child.count < 0 && (
+            <List
+              color={"red"}
+              message={"oh! you need to do tasks to clear your bad points. "}
+              list={tasks}
+              disabled={() => {
+                return false;
+              }}
+              onChangeChildPoints={(item) => handleChange(item)}
+            />
+          )}
         </div>
       </div>
     </>
   );
 }
 
-function List({
-  list,
-  onChangeChildPoints,
-  color,
-  message,
-  disabled,
-  onUpdateItem,
-}) {
+function List({ list, onChangeChildPoints, color, message, disabled }) {
   const [isEdit, setIsEdit] = useState(false);
-  const [itemName, setItemName] = useState("");
-  const [itemPoints, setItemPoints] = useState(null);
-  const [item, setItem] = useState("");
   const [errorMessage, setErrorMessage] = useState(" ");
+  const [itemName, setItemName] = useState(null);
+  const [itemPoints, setItemPoints] = useState(null);
+  const [listItems, setlistItems] = useState(list);
+  const [eidtedItem, setEditedItem] = useState("");
 
+  function UpdateList(item, name, points) {
+    item.name = name;
+    item.points = points;
+    setlistItems([...listItems, { item }]);
+  }
+
+  function handleEdit(item) {
+    setItemName(item.name);
+    setItemPoints(item.points);
+    setIsEdit(true);
+    setEditedItem(item);
+  }
+  function handleCancel() {
+    setItemName("");
+    setItemPoints("");
+    setErrorMessage("");
+    setIsEdit(false);
+  }
+  function handleSave() {
+    if (itemName.trim() && itemPoints > 0) {
+      setErrorMessage("");
+      UpdateList(eidtedItem, itemName, itemPoints);
+      setIsEdit(false);
+    } else {
+      setErrorMessage(" cant save if it is blank");
+    }
+  }
   return (
     <>
       <Alert>
         <h5 style={{ color: color }}>{message}</h5>
       </Alert>
-      {isEdit && (
+      {isEdit ? (
         <Form className="summary-edit-form">
           <Form.Label column sm="2">
             Edit Name
@@ -136,35 +138,13 @@ function List({
               setErrorMessage("");
             }}
           />
-          <Button
-            onClick={() => {
-              if (itemName.trim() && itemPoints >= 1) {
-                setErrorMessage("");
-                onUpdateItem(item, itemName, itemPoints);
-                setIsEdit(false);
-              } else {
-                setErrorMessage(" cant save if it is blank");
-              }
-            }}
-          >
-            Save
-          </Button>
-          <Button
-            onClick={() => {
-              setItemName("");
-              setItemPoints("");
-              setErrorMessage("");
-              setIsEdit(false);
-            }}
-          >
-            Cancel
-          </Button>
+          <Button onClick={handleSave}>Save</Button>
+          <Button onClick={handleCancel}>Cancel</Button>
           <p style={{ color: "red" }}>{errorMessage}</p>
         </Form>
-      )}
-      {!isEdit && (
-        <>
-          {list.map((item) => (
+      ) : (
+        <div>
+          {listItems.map((item) => (
             <div key={item.id}>
               <ListGroup as="ul" className="summary-list">
                 <ListGroup.Item
@@ -185,19 +165,14 @@ function List({
                   as="button"
                   action
                   variant="light"
-                  onClick={() => {
-                    setItem(item);
-                    setIsEdit(true);
-                    setItemName(item.name);
-                    setItemPoints(item.points);
-                  }}
+                  onClick={() => handleEdit(item)}
                 >
-                  Edit
+                  edit
                 </ListGroup.Item>
               </ListGroup>
             </div>
           ))}
-        </>
+        </div>
       )}
     </>
   );
