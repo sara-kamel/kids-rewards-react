@@ -144,10 +144,10 @@ body {
   margin: 10px;
 }
 .delete-button {
-  display: block;
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
+position: absolute;
+left:5px;
+bottom: 10px;
+ 
 }
 .brush-icon {
   position: absolute;

@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { Button, Modal, Badge, Stack, Card, Form } from "react-bootstrap";
+import { Button, Modal, Badge, Card } from "react-bootstrap";
 import Summary from "./Summary";
 import FunnyFaces from "./FunnyFaces";
+import UpdateChildName from "./UpdateChildName";
 
 export default function Person({ onDeletChild, onEditChild, child }) {
-  const [editPicture, setEditPicture] = useState(false);
+  const [isEditPicture, setIsEditPicture] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleClose = () => {
     setShow(false);
-    setEditPicture(false);
+    setIsEditPicture(false);
   };
   const handleShow = () => setShow(true);
 
@@ -55,7 +56,6 @@ export default function Person({ onDeletChild, onEditChild, child }) {
         >
           Bad Point &#128078;
         </Button>
-
         <div>
           <h6 href="#" className="show-more" onClick={handleShow}>
             Show More
@@ -77,7 +77,7 @@ export default function Person({ onDeletChild, onEditChild, child }) {
                     className="brush-icon"
                     title="Edit picture"
                     onClick={() => {
-                      setEditPicture(!editPicture);
+                      setIsEditPicture(!isEditPicture);
                     }}
                   >
                     &#128396;
@@ -90,35 +90,35 @@ export default function Person({ onDeletChild, onEditChild, child }) {
                   </h1>
                 </Card.Title>
                 <Card.Body>
-                  {editPicture && (
-                    <EditPicture
-                      pictures={FunnyFaces}
-                      onChoosePicture={(value) => {
-                        onEditChild(
-                          { ...child, picture: value },
-                          `${child.name} changed the picture`
-                        );
-                      }}
-                      onSave={() => {
-                        setEditPicture(false);
-                      }}
-                    />
+                  {isEditPicture && (
+                    <section className="edit-picture-container">
+                      {FunnyFaces.map((picture) => (
+                        <>
+                          <div>
+                            <img
+                              alt="mini-animals"
+                              src={picture.image_url}
+                              onClick={() => {
+                                onEditChild(
+                                  { ...child, picture: picture.image_url },
+                                  `${child.name} changed the picture`
+                                );
+                              }}
+                            />
+                          </div>
+                        </>
+                      ))}
+                      <br />
+                      <Button
+                        variant="outline-info"
+                        onClick={() => setIsEditPicture(false)}
+                      >
+                        Close
+                      </Button>
+                    </section>
                   )}
                 </Card.Body>
-                <Card.Footer>
-                  <Button
-                    className="delete-button"
-                    variant="danger"
-                    onClick={() => {
-                      onEditChild(child, `${child.name} has been deleted`);
-                      onDeletChild();
-                    }}
-                  >
-                    Delete
-                  </Button>
-                </Card.Footer>
               </Card>
-
               <Summary
                 key={child.id}
                 child={child}
@@ -127,6 +127,16 @@ export default function Person({ onDeletChild, onEditChild, child }) {
             </Modal.Body>
 
             <Modal.Footer>
+              <Button
+                className="delete-button"
+                variant="danger"
+                onClick={() => {
+                  onEditChild(child, `${child.name} has been deleted`);
+                  onDeletChild();
+                }}
+              >
+                Delete
+              </Button>
               <UpdateChildName
                 child={child}
                 onUpdateChildName={(childName) => {
@@ -138,113 +148,12 @@ export default function Person({ onDeletChild, onEditChild, child }) {
                     `${child.name} updated to ${childName}`
                   );
                 }}
-                handleClose={handleClose}
+                onClose={handleClose}
               />
             </Modal.Footer>
           </Modal>
         </div>
       </div>
     </article>
-  );
-}
-
-function EditPicture({ pictures, onChoosePicture, onSave }) {
-  return (
-    <section className="edit-picture-container">
-      {pictures.map((picture) => (
-        <>
-          <div>
-            <img
-              alt="mini-animals"
-              src={picture.image_url}
-              onClick={() => {
-                onChoosePicture(picture.image_url);
-              }}
-            />
-          </div>
-        </>
-      ))}
-      <br />
-      <Button variant="outline-info" onClick={onSave}>
-        Close
-      </Button>
-    </section>
-  );
-}
-
-function UpdateChildName({ child, onUpdateChildName, handleClose }) {
-  const [isEdit, setIsEdit] = useState(false);
-  const [childName, setChildName] = useState(child.name);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  function onClose() {
-    setErrorMessage("");
-    setIsEdit(false);
-    setChildName(child.name);
-  }
-
-  return (
-    <>
-      {isEdit && (
-        <div>
-          <Stack direction="horizontal" gap={3}>
-            <Form.Control
-              value={childName}
-              onChange={(e) => {
-                setChildName(e.target.value);
-                setErrorMessage("");
-              }}
-            />
-            <Button
-              variant="secondary"
-              className="button"
-              onClick={() => {
-                if (childName === child.name) {
-                  setIsEdit(!isEdit);
-                  return;
-                }
-                if (childName.trim()) {
-                  console.log(childName);
-                  setIsEdit(!isEdit);
-                  onUpdateChildName(childName);
-                } else {
-                  setErrorMessage("Can't save if it is blank.");
-                }
-              }}
-            >
-              Save
-            </Button>
-            <div className="vr" />
-            <Button
-              variant="outline-danger"
-              className="button"
-              onClick={() => {
-                onClose();
-              }}
-            >
-              Cancel
-            </Button>
-          </Stack>
-
-          <p style={{ color: "red" }}>{errorMessage}</p>
-        </div>
-      )}
-      {!isEdit && (
-        <div>
-          <Button
-            variant="secondary"
-            onClick={() => {
-              setIsEdit(!isEdit);
-            }}
-          >
-            Edit
-          </Button>
-          <div className="vr" />
-          <Button variant="secondary" onClick={() => handleClose(onClose)}>
-            Close
-          </Button>
-        </div>
-      )}
-    </>
   );
 }
