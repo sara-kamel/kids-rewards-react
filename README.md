@@ -17,7 +17,7 @@ React, React Bootstrap, Javascript, CSS.
 ![Child Profile](https://raw.githubusercontent.com/sara-kamel/kids-rewards-react/8147aadb584be797d38ac8edd94602cf6c4f65ff/src/assets/screenshots/desktop/5.png "Child Profile")
 ![History](https://raw.githubusercontent.com/sara-kamel/kids-rewards-react/8147aadb584be797d38ac8edd94602cf6c4f65ff/src/assets/screenshots/desktop/6.png "History")
 
-## on Mobile :
+### on Mobile :
 
 ![Main Page](https://raw.githubusercontent.com/sara-kamel/kids-rewards-react/8147aadb584be797d38ac8edd94602cf6c4f65ff/src/assets/screenshots/mobile/mobile%201.png "Main Page")
 ![Add Child Section](https://raw.githubusercontent.com/sara-kamel/kids-rewards-react/8147aadb584be797d38ac8edd94602cf6c4f65ff/src/assets/screenshots/mobile/mobile%202.png "Add Child Section")
