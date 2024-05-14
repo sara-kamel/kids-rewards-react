@@ -126,9 +126,10 @@ export default function Person({ onDeletChild, onEditChild, child }) {
               />
             </Modal.Body>
 
-            <Modal.Footer>
+            <Modal.Footer
+              style={{ justifyContent: "space-between", marginBottom: "20px" }}
+            >
               <Button
-                className="delete-button"
                 variant="danger"
                 onClick={() => {
                   onEditChild(child, `${child.name} has been deleted`);

@@ -37,7 +37,7 @@ export default function AddChild({ onAddChild }) {
         style={{ display: showForm ? "block" : "none" }}
       >
         <label>
-          <b>Put Your Child Name:</b>{" "}
+          <b>Child Name:</b>
         </label>
         <br />
         <input

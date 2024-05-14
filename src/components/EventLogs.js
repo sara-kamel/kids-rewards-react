@@ -35,7 +35,11 @@ export default function EventLogs({ eventLogs, onClearHistory }) {
             </ListGroup>
           ))}
         </Offcanvas.Body>
-        <Button variant="outline-info" onClick={onClearHistory}>
+        <Button
+          variant="outline-info"
+          onClick={onClearHistory}
+          style={{ marginBottom: "30px" }}
+        >
           Clear history
         </Button>
       </Offcanvas>

@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import List from './List'
+import List from "./List";
 
 const rewards = [
   { name: "High Five", id: uuidv4(), points: 1 },

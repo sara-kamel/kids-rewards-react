@@ -62,7 +62,6 @@ export default function App() {
   return (
     <div className="main-page">
       <Header />
-
       <AddChild
         onAddChild={(childName, picture, event) => {
           setChildren([
