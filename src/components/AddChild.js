@@ -3,7 +3,6 @@ import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 
-
 export default function AddChild({ onAddChild }) {
   const [childName, setChildName] = useState("");
   const [childPicture, setChildPicture] = useState(null);
@@ -41,21 +40,27 @@ export default function AddChild({ onAddChild }) {
         </label>
         <br />
         <input
+          data-testid="child-name"
           value={childName}
           onChange={(e) => {
             setChildName(e.target.value);
             setErrorMessage("");
           }}
         />
-        <Button onClick={() => setShowPicture(true)} variant="info">
-          choose picture
+        <Button
+          data-testid="choose-picture"
+          onClick={() => setShowPicture(true)}
+          variant="info"
+        >
+          Choose Picture
         </Button>
-       
+
         <br />
-        <figure>
+        <figure >
           {showPicture &&
             FunnyFaces.map((face) => (
               <img
+                key={face.id}
                 className="child-picture"
                 onClick={() => {
                   setChildPicture(face.image_url);
@@ -72,6 +77,7 @@ export default function AddChild({ onAddChild }) {
 
         <br />
         <Button
+          data-testid="save-button"
           variant="outline-success"
           onClick={() => {
             if (childName.trim() && childPicture) {
