@@ -4,7 +4,7 @@ import Summary from "./Summary";
 import FunnyFaces from "./FunnyFaces";
 import UpdateChildName from "./UpdateChildName";
 
-export default function Person({ onDeletChild, onEditChild, child }) {
+export default function Child({ onDeletChild, onEditChild, child }) {
   const [isEditPicture, setIsEditPicture] = useState(false);
   const [show, setShow] = useState(false);
 

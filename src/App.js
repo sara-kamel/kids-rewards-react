@@ -1,5 +1,5 @@
 import React from "react";
-import Person from "./components/Person";
+
 import AddChild from "./components/AddChild";
 import EventLogs from "./components/EventLogs";
 import Header from "./components/Header";
@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/index.css";
+import Child from "./components/Child";
 
 export default function App() {
   const [eventLogs, setEventLogs] = useState(() => {
@@ -86,7 +87,7 @@ export default function App() {
       <div className="children-list">
         {children.map((child) => (
           <>
-            <Person
+            <Child
               key={child.id}
               child={child}
               onEditChild={onUpdateChild}
