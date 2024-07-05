@@ -1,21 +1,21 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import Button from "react-bootstrap/Button";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import { ListGroup } from "react-bootstrap";
+import Button from 'react-bootstrap/Button'
+import Offcanvas from 'react-bootstrap/Offcanvas'
+import { ListGroup } from 'react-bootstrap'
 
-export default function EventLogs({ eventLogs, onClearHistory }) {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+export default function EventLogs ({ eventLogs, onClearHistory }) {
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
-  const reverseENentLogs = [...eventLogs].reverse();
+  const reverseENentLogs = [...eventLogs].reverse()
 
   return (
     <div>
       <Button
-        style={{ float: "right" }}
-        variant="outline-info"
+        style={{ float: 'right' }}
+        variant='outline-info'
         onClick={handleShow}
       >
         History
@@ -26,23 +26,23 @@ export default function EventLogs({ eventLogs, onClearHistory }) {
           <Offcanvas.Title>History:</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          {reverseENentLogs.map((event) => (
+          {reverseENentLogs.map(event => (
             <ListGroup>
-              <ListGroup.Item variant="info">
+              <ListGroup.Item variant='info'>
                 {event.event}
-                <span className="time-event-logs">{event.time}</span>
+                <span className='time-event-logs'>{event.time}</span>
               </ListGroup.Item>
             </ListGroup>
           ))}
         </Offcanvas.Body>
         <Button
-          variant="outline-info"
+          variant='outline-info'
           onClick={onClearHistory}
-          style={{ marginBottom: "30px" }}
+          style={{ marginBottom: '30px' }}
         >
           Clear history
         </Button>
       </Offcanvas>
     </div>
-  );
+  )
 }

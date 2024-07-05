@@ -169,38 +169,37 @@ body {
   padding: 10px;
   justify-content: space-between;
 }
-.summary-list{
-  display:flex;
+.summary-list {
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   margin: 2px;
   gap: 5px;
-  }
-  .summary-list li{
-    width: 80%;
-    border-radius: 5px;
-  }
-  
-  .summary-list li:hover {
-    border: 1px solid rgb(124, 124, 201);
-  
-  }
-  .summary-list button{
-    width: 15%;
-    border-radius: 5px;
-    color:rgb(67, 33, 216);
-    margin: 5px;
-  }
-  
-  .summary-list button:focus{
-    background: rgb(139, 63, 211);
-    color:white;
-  }
-  .summary-edit-form button{
-  margin:5px;
-  }
+}
+.summary-list li {
+  width: 80%;
+  border-radius: 5px;
+}
+
+.summary-list li:hover {
+  border: 1px solid rgb(124, 124, 201);
+}
+.summary-list button {
+  width: 15%;
+  border-radius: 5px;
+  color: rgb(67, 33, 216);
+  margin: 5px;
+}
+
+.summary-list button:focus {
+  background: rgb(139, 63, 211);
+  color: white;
+}
+.summary-edit-form button {
+  margin: 5px;
+}
 
 @media only screen and (max-width: 700px) {
   .header img {
@@ -226,5 +225,4 @@ body {
   .footer {
     flex-direction: column;
   }
- 
 }

@@ -1,30 +1,30 @@
-import FunnyFaces from "./FunnyFaces";
-import { Button } from "react-bootstrap";
-import { useState } from "react";
-import { FiPlus } from "react-icons/fi";
+import FunnyFaces from './FunnyFaces'
+import { Button } from 'react-bootstrap'
+import { useState } from 'react'
+import { FiPlus } from 'react-icons/fi'
 
-export default function AddChild({ onAddChild }) {
-  const [childName, setChildName] = useState("");
-  const [childPicture, setChildPicture] = useState(null);
-  const [pictureId, setPictureId] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showPicture, setShowPicture] = useState(false);
-  const [showForm, setShowForm] = useState(false);
+export default function AddChild ({ onAddChild }) {
+  const [childName, setChildName] = useState('')
+  const [childPicture, setChildPicture] = useState(null)
+  const [pictureId, setPictureId] = useState(null)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [showPicture, setShowPicture] = useState(false)
+  const [showForm, setShowForm] = useState(false)
 
   const onHandleClose = () => {
-    setShowPicture(false);
-    setChildPicture(null);
-    setShowForm(!showForm);
-    setErrorMessage("");
-    setChildName("");
-    setPictureId(null);
-  };
+    setShowPicture(false)
+    setChildPicture(null)
+    setShowForm(!showForm)
+    setErrorMessage('')
+    setChildName('')
+    setPictureId(null)
+  }
   return (
     <section>
       <Button
-        variant="outline-primary"
+        variant='outline-primary'
         onClick={() => {
-          onHandleClose();
+          onHandleClose()
         }}
       >
         <FiPlus />
@@ -32,44 +32,44 @@ export default function AddChild({ onAddChild }) {
       </Button>
 
       <article
-        className="add-child-form"
-        style={{ display: showForm ? "block" : "none" }}
+        className='add-child-form'
+        style={{ display: showForm ? 'block' : 'none' }}
       >
         <label>
           <b>Child Name:</b>
         </label>
         <br />
         <input
-          data-testid="child-name"
+          data-testid='child-name'
           value={childName}
-          onChange={(e) => {
-            setChildName(e.target.value);
-            setErrorMessage("");
+          onChange={e => {
+            setChildName(e.target.value)
+            setErrorMessage('')
           }}
         />
         <Button
-          data-testid="choose-picture"
+          data-testid='choose-picture'
           onClick={() => setShowPicture(true)}
-          variant="info"
+          variant='info'
         >
           Choose Picture
         </Button>
 
         <br />
-        <figure >
+        <figure>
           {showPicture &&
-            FunnyFaces.map((face) => (
+            FunnyFaces.map(face => (
               <img
                 key={face.id}
-                className="child-picture"
+                className='child-picture'
                 onClick={() => {
-                  setChildPicture(face.image_url);
-                  setPictureId(face.id);
+                  setChildPicture(face.image_url)
+                  setPictureId(face.id)
                 }}
                 src={face.image_url}
-                alt="funny faces"
+                alt='funny faces'
                 style={{
-                  border: pictureId === face.id ? "3px solid red" : "none",
+                  border: pictureId === face.id ? '3px solid red' : 'none'
                 }}
               />
             ))}
@@ -77,33 +77,33 @@ export default function AddChild({ onAddChild }) {
 
         <br />
         <Button
-          data-testid="save-button"
-          variant="outline-success"
+          data-testid='save-button'
+          variant='outline-success'
           onClick={() => {
             if (childName.trim() && childPicture) {
               onAddChild(
                 childName,
                 childPicture,
                 `${childName} has been added!`
-              );
-              onHandleClose();
+              )
+              onHandleClose()
             } else {
-              setErrorMessage("please! add child name and choose picture.");
+              setErrorMessage('please! add child name and choose picture.')
             }
           }}
         >
           Save
         </Button>
         <Button
-          variant="outline-dark"
+          variant='outline-dark'
           onClick={() => {
-            onHandleClose();
+            onHandleClose()
           }}
         >
           Cancel
         </Button>
-        <p style={{ color: "red" }}>{errorMessage}</p>
+        <p style={{ color: 'red' }}>{errorMessage}</p>
       </article>
     </section>
-  );
+  )
 }
