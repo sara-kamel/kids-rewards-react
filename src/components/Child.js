@@ -83,10 +83,12 @@ export default function Child ({ onDeletChild, onEditChild, child }) {
                     &#128396;
                   </div>
                   <h1 style={{ textAlign: 'center' }}>
-                    {child.name}
-                    <Badge pill bg={child.count >= 0 ? 'success' : 'danger'}>
-                      {child.count}
-                    </Badge>
+                    {child.name}{' '}
+                    <span>
+                      <Badge pill bg={child.count >= 0 ? 'success' : 'danger'}>
+                        {child.count}
+                      </Badge>
+                    </span>
                   </h1>
                 </Card.Title>
                 <Card.Body>
@@ -108,7 +110,6 @@ export default function Child ({ onDeletChild, onEditChild, child }) {
                           </div>
                         </>
                       ))}
-                      <br />
                       <Button
                         variant='outline-info'
                         onClick={() => setIsEditPicture(false)}
